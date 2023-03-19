@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:~/kakao/bank/blogSearch/h2-console;
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: H2
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    generate-ddl: true
+    defer-datasource-initialization: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  sql:
+    init:
+      platform: h2
+
+server:
+  port: 8080
+
+
+kakao-developers:
+  search:
+    host: https://dapi.kakao.com
+    api-key: 5ca959788627bfab17f6f1ae8e8833ff
