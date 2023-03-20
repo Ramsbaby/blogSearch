@@ -25,3 +25,10 @@ kakao-developers:
   search:
     host: https://dapi.kakao.com
     api-key: 5ca959788627bfab17f6f1ae8e8833ff
+
+
+naver-developers:
+  search:
+    host: https://openapi.naver.com
+    client-id: mXyn7UNQ7dA2ffZXnOKa
+    client-secret: OWIQMoburP
