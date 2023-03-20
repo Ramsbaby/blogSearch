@@ -1,8 +1,8 @@
-package com.ramsbaby.blogsearchservice.domain.blog;
+package com.ramsbaby.blogsearchservice.domain.blog.common;
 
 import com.ramsbaby.blogsearchservice.connector.KakaoApiClient;
-import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
-import com.ramsbaby.blogsearchservice.domain.blog.dto.KaKaoBlogResponse;
+import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KakaoBlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KaKaoBlogSearchResponse;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class BlogService {
         return responseList;
     }
 
-    public KaKaoBlogResponse getBlogs(BlogSearchRequestDto requestDto) {
+    public KaKaoBlogSearchResponse getBlogs(KakaoBlogSearchRequestDto requestDto) {
         return kakaoApiClient.searchKakaoBlog(requestDto);
     }
 

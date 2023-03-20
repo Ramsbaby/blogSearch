@@ -1,4 +1,4 @@
-package com.ramsbaby.blogsearchservice.domain.blog;
+package com.ramsbaby.blogsearchservice.domain.blog.common;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

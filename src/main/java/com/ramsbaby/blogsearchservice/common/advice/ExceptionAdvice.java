@@ -41,47 +41,11 @@ public class ExceptionAdvice {
             .build();
     }
 
-    @ExceptionHandler(value = NotEnoughPointException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleNotEnoughPointException(NotEnoughPointException e) {
-        return new ErrorResponse.Builder()
-            .setCode(HttpStatus.BAD_REQUEST.value())
-            .setMsg(e.getMessage())
-            .build();
-    }
-
-    @ExceptionHandler(value = NotExistPartnerException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleNotExistUserException(NotExistPartnerException e) {
-        return new ErrorResponse.Builder()
-            .setCode(HttpStatus.NOT_FOUND.value())
-            .setMsg(e.getMessage())
-            .build();
-    }
-
     @ExceptionHandler(value = NotExistUserException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleNotExistUserException(NotExistUserException e) {
         return new ErrorResponse.Builder()
             .setCode(HttpStatus.NOT_FOUND.value())
-            .setMsg(e.getMessage())
-            .build();
-    }
-
-    @ExceptionHandler(value = NotExistBarcodeException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleNotExistBarcodeException(NotExistBarcodeException e) {
-        return new ErrorResponse.Builder()
-            .setCode(HttpStatus.NOT_FOUND.value())
-            .setMsg(e.getMessage())
-            .build();
-    }
-
-    @ExceptionHandler(value = BarcodeExistException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleBarcodeExistException(BarcodeExistException e) {
-        return new ErrorResponse.Builder()
-            .setCode(HttpStatus.BAD_REQUEST.value())
             .setMsg(e.getMessage())
             .build();
     }

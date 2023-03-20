@@ -1,7 +1,7 @@
 package com.ramsbaby.blogsearchservice.connector;
 
-import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
-import com.ramsbaby.blogsearchservice.domain.blog.dto.KaKaoBlogResponse;
+import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KakaoBlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KaKaoBlogSearchResponse;
 import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +26,7 @@ public class KakaoApiClient {
         this.webClient = WebClient.builder().baseUrl(kakaoApiHost).build();
     }
 
-    public KaKaoBlogResponse searchKakaoBlog(BlogSearchRequestDto requestDto) {
+    public KaKaoBlogSearchResponse searchKakaoBlog(KakaoBlogSearchRequestDto requestDto) {
         return this.webClient.get()
             .uri(uriBuilder -> uriBuilder.path("/v2/search/blog")
                 .queryParam("query", requestDto.getQuery())
@@ -36,7 +36,7 @@ public class KakaoApiClient {
                 .build())
             .header(HttpHeaders.AUTHORIZATION, "KakaoAK " + kakaoApikey)
             .retrieve()
-            .bodyToMono(KaKaoBlogResponse.class)
+            .bodyToMono(KaKaoBlogSearchResponse.class)
             .block();
     }
 

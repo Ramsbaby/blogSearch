@@ -1,4 +1,4 @@
-package com.ramsbaby.blogsearchservice.domain.blog;
+package com.ramsbaby.blogsearchservice.domain.blog.common;
 
 import com.ramsbaby.blogsearchservice.common.entity.CommonEntity;
 import javax.persistence.Column;

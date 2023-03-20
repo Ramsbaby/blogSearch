@@ -1,4 +1,4 @@
-package com.ramsbaby.blogsearchservice.domain.blog.dto;
+package com.ramsbaby.blogsearchservice.domain.blog.kakao.dto;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class KaKaoBlogResponse {
+public class KaKaoBlogSearchResponse {
     List<DocumentDto> documents;
 }

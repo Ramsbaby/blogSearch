@@ -1,4 +1,4 @@
-package com.ramsbaby.blogsearchservice.domain.blog;
+package com.ramsbaby.blogsearchservice.domain.blog.common;
 
 public interface Top10Keyword {
 

@@ -1,4 +1,4 @@
-package com.ramsbaby.blogsearchservice.domain.blog.dto;
+package com.ramsbaby.blogsearchservice.domain.blog.kakao.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

@@ -1,8 +1,8 @@
 package com.ramsbaby.blogsearchservice.common.aspect;
 
-import com.ramsbaby.blogsearchservice.domain.blog.Keyword;
-import com.ramsbaby.blogsearchservice.domain.blog.KeywordRepository;
-import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.common.Keyword;
+import com.ramsbaby.blogsearchservice.domain.blog.common.KeywordRepository;
+import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KakaoBlogSearchRequestDto;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -19,7 +19,7 @@ public class HistoryAspect {
 
     @Transactional
     @Around("execution (* com.ramsbaby.blogsearchservice.connector.KakaoApiClient.*(..)) && args(requestDto, ..)")
-    public Object saveHistory(ProceedingJoinPoint joinPoint, BlogSearchRequestDto requestDto) throws Throwable {
+    public Object saveHistory(ProceedingJoinPoint joinPoint, KakaoBlogSearchRequestDto requestDto) throws Throwable {
         Keyword history = Keyword.builder()
             .searchWord(requestDto.getQuery())
             .build();

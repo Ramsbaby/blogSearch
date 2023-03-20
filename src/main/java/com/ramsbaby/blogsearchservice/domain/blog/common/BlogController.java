@@ -1,9 +1,9 @@
-package com.ramsbaby.blogsearchservice.domain.blog;
+package com.ramsbaby.blogsearchservice.domain.blog.common;
 
 import com.ramsbaby.blogsearchservice.common.aspect.BlogSearchRequestCheck;
 import com.ramsbaby.blogsearchservice.common.response.ApiResponse;
-import com.ramsbaby.blogsearchservice.domain.blog.BlogService.Top10KeywordResponse;
-import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.common.BlogService.Top10KeywordResponse;
+import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KakaoBlogSearchRequestDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ public class BlogController {
 
     @GetMapping("")
     @BlogSearchRequestCheck
-    public ApiResponse getBlogs(@RequestBody BlogSearchRequestDto requestDto) {
+    public ApiResponse getBlogs(@RequestBody KakaoBlogSearchRequestDto requestDto) {
         return ApiResponse.success(blogService.getBlogs(requestDto));
     }
 

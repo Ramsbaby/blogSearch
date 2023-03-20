@@ -1,4 +1,4 @@
-package com.ramsbaby.blogsearchservice.domain.blog.dto;
+package com.ramsbaby.blogsearchservice.domain.blog.kakao.dto;
 
 import lombok.Getter;
 import lombok.Setter;
