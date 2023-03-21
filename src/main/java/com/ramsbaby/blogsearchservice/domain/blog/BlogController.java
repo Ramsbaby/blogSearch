@@ -22,14 +22,7 @@ public class BlogController {
     @GetMapping("")
     @BlogSearchRequestCheck
     public ApiResponse getBlogs(@RequestBody BlogSearchRequestDto requestDto) {
-        BlogSearchRequestDto validRequest = BlogSearchRequestDto.builder()
-            .query(requestDto.getQuery())
-            .sort(requestDto.getSort())
-            .page(requestDto.getPage())
-            .size(requestDto.getSize())
-            .build();
-
-        return ApiResponse.success(blogService.getBlogs(validRequest));
+        return ApiResponse.success(blogService.getBlogs(requestDto));
     }
 
     @GetMapping("/top10")
