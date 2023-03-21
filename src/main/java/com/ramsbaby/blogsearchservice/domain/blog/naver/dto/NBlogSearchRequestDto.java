@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.util.ObjectUtils;
 
 @Getter
 @NoArgsConstructor
@@ -16,6 +17,8 @@ public class NBlogSearchRequestDto {
     String sort;
     Integer start;
     Integer display;
+
+    public static final String DEFAULT_SORT_VALUE = "sim";
 
     public static NBlogSearchRequestDto of(BlogSearchRequestDto requestDto) {
         int startParam = requestDto.getPage() == null ? 1 : requestDto.getPage();
@@ -30,7 +33,12 @@ public class NBlogSearchRequestDto {
     }
 
     public static String getTransSort(String sort) {
-        if (sort.equals("sim") || sort.equals("date")) return sort;
+        if (ObjectUtils.isEmpty(sort)) {
+            return DEFAULT_SORT_VALUE;
+        }
+        if (sort.equals("sim") || sort.equals("date")) {
+            return sort;
+        }
         if (sort.equals("accuracy")) {
             return "sim";
         } else {
