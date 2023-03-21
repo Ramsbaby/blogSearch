@@ -41,15 +41,6 @@ public class ExceptionAdvice {
             .build();
     }
 
-    @ExceptionHandler(value = NotExistUserException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleNotExistUserException(NotExistUserException e) {
-        return new ErrorResponse.Builder()
-            .setCode(HttpStatus.NOT_FOUND.value())
-            .setMsg(e.getMessage())
-            .build();
-    }
-
     @ExceptionHandler(value = ParseException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse parseException(ParseException e) {

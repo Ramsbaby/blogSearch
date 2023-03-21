@@ -57,5 +57,4 @@ public class NaverApiClient implements BlogSearchApi {
         return responseDto.getItems().stream().limit(MAX_PAGE_SIZE).map(BlogSearchResponseDto::new)
             .collect(Collectors.toList());
     }
-
 }
