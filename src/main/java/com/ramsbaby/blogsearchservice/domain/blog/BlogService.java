@@ -1,7 +1,7 @@
 package com.ramsbaby.blogsearchservice.domain.blog;
 
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchRequestDto;
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchResponseDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchResponseDto;
 import com.ramsbaby.blogsearchservice.domain.blog.kakao.KakaoApiClient;
 import com.ramsbaby.blogsearchservice.domain.blog.naver.NaverApiClient;
 import java.util.ArrayList;
@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.HttpStatusCodeException;
 
 @Service
 @RequiredArgsConstructor
@@ -28,12 +27,10 @@ public class BlogService {
         List<Top10KeywordResponse> responseList = new ArrayList<>();
         List<Top10Keyword> top10List = keywordRepository.findTop10();
 
-        top10List.forEach(keyword -> {
-            responseList.add(Top10KeywordResponse.builder()
-                .keyword(keyword.getTitle())
-                .count(keyword.getCount())
-                .build());
-        });
+        top10List.forEach(keyword -> responseList.add(Top10KeywordResponse.builder()
+            .keyword(keyword.getTitle())
+            .count(keyword.getCount())
+            .build()));
 
         return responseList;
     }
@@ -60,7 +57,6 @@ public class BlogService {
     @Builder
     @AllArgsConstructor
     static class Top10KeywordResponse {
-
         private String keyword;
         private Long count;
     }

@@ -1,7 +1,7 @@
 package com.ramsbaby.blogsearchservice.api;
 
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchRequestDto;
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchResponseDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchResponseDto;
 import java.util.List;
 
 public interface BlogSearchApi {

@@ -2,7 +2,7 @@ package com.ramsbaby.blogsearchservice.common.aspect;
 
 import com.ramsbaby.blogsearchservice.common.advice.InvalidParameterException;
 import com.ramsbaby.blogsearchservice.common.advice.RequiredKeywordException;
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

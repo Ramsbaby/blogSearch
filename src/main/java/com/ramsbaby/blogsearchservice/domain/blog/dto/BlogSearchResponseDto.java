@@ -1,9 +1,7 @@
-package com.ramsbaby.blogsearchservice.domain.blog.commonDto;
+package com.ramsbaby.blogsearchservice.domain.blog.dto;
 
 import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KBlogSearchResponseDetailDto;
-import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KBlogSearchResponseDto;
 import com.ramsbaby.blogsearchservice.domain.blog.naver.dto.NBlogSearchResponseDetailDto;
-import com.ramsbaby.blogsearchservice.domain.blog.naver.dto.NBlogSearchResponseDto;
 import lombok.Getter;
 import lombok.Setter;
 

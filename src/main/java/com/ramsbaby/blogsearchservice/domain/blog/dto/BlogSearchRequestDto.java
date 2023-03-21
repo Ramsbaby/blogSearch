@@ -1,4 +1,4 @@
-package com.ramsbaby.blogsearchservice.domain.blog.commonDto;
+package com.ramsbaby.blogsearchservice.domain.blog.dto;
 
 import lombok.Builder;
 import lombok.Getter;

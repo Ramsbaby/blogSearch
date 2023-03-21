@@ -1,7 +1,7 @@
 package com.ramsbaby.blogsearchservice.common.aspect;
 
 import com.ramsbaby.blogsearchservice.domain.blog.BlogService;
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;

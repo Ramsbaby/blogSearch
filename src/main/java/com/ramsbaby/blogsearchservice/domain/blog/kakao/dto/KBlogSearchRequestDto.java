@@ -1,6 +1,6 @@
 package com.ramsbaby.blogsearchservice.domain.blog.kakao.dto;
 
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

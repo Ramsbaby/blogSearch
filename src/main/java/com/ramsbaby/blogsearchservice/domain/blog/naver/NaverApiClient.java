@@ -1,8 +1,8 @@
 package com.ramsbaby.blogsearchservice.domain.blog.naver;
 
 import com.ramsbaby.blogsearchservice.api.BlogSearchApi;
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchRequestDto;
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchResponseDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchResponseDto;
 import com.ramsbaby.blogsearchservice.domain.blog.naver.dto.NBlogSearchRequestDto;
 import com.ramsbaby.blogsearchservice.domain.blog.naver.dto.NBlogSearchResponseDto;
 import java.util.List;
@@ -17,19 +17,16 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Slf4j
 public class NaverApiClient implements BlogSearchApi {
 
-    private WebClient webClient;
-
-    @Value("${naver-developers.search.host}")
-    private String naverApiHost;
-
-    @Value("${naver-developers.search.client-id}")
-    private String naverApiClientId;
-
-    @Value("${naver-developers.search.client-secret}")
-    private String naverApiClientSecret;
-
     private final String NAVER_CLIENT_ID_HEADER = "X-Naver-Client-Id";
     private final String NAVER_CLIENT_SECRET_HEADER = "X-Naver-Client-Secret";
+    private final Long MAX_PAGE_SIZE = 100L;
+    private WebClient webClient;
+    @Value("${naver-developers.search.host}")
+    private String naverApiHost;
+    @Value("${naver-developers.search.client-id}")
+    private String naverApiClientId;
+    @Value("${naver-developers.search.client-secret}")
+    private String naverApiClientSecret;
 
     @PostConstruct
     public void initWebclient() {
@@ -53,7 +50,8 @@ public class NaverApiClient implements BlogSearchApi {
             .bodyToMono(NBlogSearchResponseDto.class)
             .block();
         assert responseDto != null;
-        return responseDto.getItems().stream().map(BlogSearchResponseDto::new).collect(Collectors.toList());
+        return responseDto.getItems().stream().map(BlogSearchResponseDto::new).limit(MAX_PAGE_SIZE)
+            .collect(Collectors.toList());
     }
 
 }

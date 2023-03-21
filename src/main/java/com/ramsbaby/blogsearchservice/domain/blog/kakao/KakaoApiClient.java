@@ -1,8 +1,8 @@
 package com.ramsbaby.blogsearchservice.domain.blog.kakao;
 
 import com.ramsbaby.blogsearchservice.api.BlogSearchApi;
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchRequestDto;
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchResponseDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchResponseDto;
 import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KBlogSearchRequestDto;
 import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KBlogSearchResponseDto;
 import java.util.List;
@@ -20,11 +20,10 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class KakaoApiClient implements BlogSearchApi {
 
+    private final Long MAX_PAGE_SIZE = 50L;
     private WebClient webClient;
-
     @Value("${kakao-developers.search.host}")
     private String kakaoApiHost;
-
     @Value("${kakao-developers.search.api-key}")
     private String kakaoApikey;
 
@@ -51,6 +50,7 @@ public class KakaoApiClient implements BlogSearchApi {
             .block();
         assert responseDto != null;
 
-        return responseDto.getDocuments().stream().map(BlogSearchResponseDto::new).collect(Collectors.toList());
+        return responseDto.getDocuments().stream().map(BlogSearchResponseDto::new).limit(MAX_PAGE_SIZE)
+            .collect(Collectors.toList());
     }
 }

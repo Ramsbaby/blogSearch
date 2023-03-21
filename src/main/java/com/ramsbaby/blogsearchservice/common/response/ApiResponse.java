@@ -1,7 +1,6 @@
 package com.ramsbaby.blogsearchservice.common.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

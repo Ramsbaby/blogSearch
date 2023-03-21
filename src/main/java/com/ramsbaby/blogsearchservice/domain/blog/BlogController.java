@@ -3,7 +3,7 @@ package com.ramsbaby.blogsearchservice.domain.blog;
 import com.ramsbaby.blogsearchservice.common.aspect.BlogSearchRequestCheck;
 import com.ramsbaby.blogsearchservice.common.response.ApiResponse;
 import com.ramsbaby.blogsearchservice.domain.blog.BlogService.Top10KeywordResponse;
-import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
