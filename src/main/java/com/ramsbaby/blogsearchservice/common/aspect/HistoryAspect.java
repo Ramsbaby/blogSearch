@@ -17,16 +17,12 @@ public class HistoryAspect {
 
     private final BlogService blogService;
 
-    @Pointcut("execution(* com.ramsbaby.blogsearchservice.domain.blog.kakao.KakaoApiClient.searchBlog*(..))")
-    public void kakaoApiClientSendMethod() {
-    }
-
-    @Pointcut("execution(* com.ramsbaby.blogsearchservice.domain.blog.naver.NaverApiClient.searchBlog*(..))")
-    public void naverApiClientSendMethod() {
+    @Pointcut("execution(* searchBlog*(..))")
+    public void searchBlogMethod() {
     }
 
     @Transactional
-    @Around("(kakaoApiClientSendMethod() || naverApiClientSendMethod()) && args(requestDto, ..)")
+    @Around("searchBlogMethod() && args(requestDto, ..)")
     public Object saveHistory(ProceedingJoinPoint joinPoint, BlogSearchRequestDto requestDto) throws Throwable {
         blogService.updateUseCount(requestDto.getQuery());
         return joinPoint.proceed();
