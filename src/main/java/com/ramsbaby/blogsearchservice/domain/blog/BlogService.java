@@ -33,9 +33,9 @@ public class BlogService {
 
     public List<BlogSearchResponseDto> getBlogs(BlogSearchRequestDto requestDto) {
         try {
-            return kakaoApiClient.searchBlog(requestDto);
-        } catch (HttpServerErrorException e) {
             return naverApiClient.searchBlog(requestDto);
+        } catch (HttpServerErrorException e) {
+            return kakaoApiClient.searchBlog(requestDto);
         }
     }
 
