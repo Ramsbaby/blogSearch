@@ -25,14 +25,14 @@ public class KakaoApiClient implements BlogSearchApi {
     private WebClient webClient;
 
     @Value("${kakao-developers.search.host}")
-    private String kakaoApiHost;
+    private String host;
 
     @Value("${kakao-developers.search.api-key}")
     private String kakaoApikey;
 
     @PostConstruct
     public void initWebclient() {
-        this.webClient = WebClient.builder().baseUrl(kakaoApiHost).build();
+        this.webClient = WebClient.builder().baseUrl(host).build();
     }
 
     @Override

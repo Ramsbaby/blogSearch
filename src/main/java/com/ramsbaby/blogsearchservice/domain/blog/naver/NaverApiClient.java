@@ -25,7 +25,7 @@ public class NaverApiClient implements BlogSearchApi {
     private WebClient webClient;
 
     @Value("${naver-developers.search.host}")
-    private String naverApiHost;
+    private String host;
 
     @Value("${naver-developers.search.client-id}")
     private String naverApiClientId;
@@ -35,7 +35,7 @@ public class NaverApiClient implements BlogSearchApi {
 
     @PostConstruct
     public void initWebclient() {
-        this.webClient = WebClient.builder().baseUrl(naverApiHost).build();
+        this.webClient = WebClient.builder().baseUrl(host).build();
     }
 
     @Override
