@@ -13,12 +13,11 @@ import org.springframework.util.ObjectUtils;
 @Builder
 public class NBlogSearchRequestDto {
 
+    public static final String DEFAULT_SORT_VALUE = "sim";
     String query;
     String sort;
     Integer start;
     Integer display;
-
-    public static final String DEFAULT_SORT_VALUE = "sim";
 
     public static NBlogSearchRequestDto of(BlogSearchRequestDto requestDto) {
         int startParam = requestDto.getPage() == null ? 1 : requestDto.getPage();

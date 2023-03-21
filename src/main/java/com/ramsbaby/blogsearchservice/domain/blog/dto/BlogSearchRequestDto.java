@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class BlogSearchRequestDto {
+
     String query;
     String sort;
     Integer size;

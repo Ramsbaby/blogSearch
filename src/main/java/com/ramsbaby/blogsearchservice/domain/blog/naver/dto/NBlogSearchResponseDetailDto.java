@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class NBlogSearchResponseDetailDto {
+
     String title;
     String description;
     String link;

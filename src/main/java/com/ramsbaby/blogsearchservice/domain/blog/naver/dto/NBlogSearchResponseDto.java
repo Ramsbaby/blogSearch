@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class NBlogSearchResponseDto {
+
     Integer total;
     Integer start;
     Integer display;

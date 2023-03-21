@@ -13,12 +13,11 @@ import org.springframework.util.ObjectUtils;
 @Builder
 public class KBlogSearchRequestDto {
 
+    public static final String DEFAULT_SORT_VALUE = "accuracy";
     String query;
     String sort;
     Integer page;
     Integer size;
-
-    public static final String DEFAULT_SORT_VALUE = "accuracy";
 
     public static KBlogSearchRequestDto of(BlogSearchRequestDto requestDto) {
         int pageParam = requestDto.getPage() == null ? 1 : requestDto.getPage();
@@ -33,8 +32,12 @@ public class KBlogSearchRequestDto {
     }
 
     public static String getTransSort(String sort) {
-        if (ObjectUtils.isEmpty(sort)) return DEFAULT_SORT_VALUE;
-        if (sort.equals("accuracy") || sort.equals("recency")) return sort;
+        if (ObjectUtils.isEmpty(sort)) {
+            return DEFAULT_SORT_VALUE;
+        }
+        if (sort.equals("accuracy") || sort.equals("recency")) {
+            return sort;
+        }
         if (sort.equals("sim")) {
             return "accuracy";
         } else {

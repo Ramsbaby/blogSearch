@@ -57,6 +57,7 @@ public class BlogService {
     @Builder
     @AllArgsConstructor
     static class Top10KeywordResponse {
+
         private String keyword;
         private Long count;
     }

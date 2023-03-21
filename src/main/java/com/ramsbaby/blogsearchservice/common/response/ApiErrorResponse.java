@@ -11,7 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
 @Getter
-public class ErrorResponse {
+public class ApiErrorResponse {
 
     private final int code;
 
@@ -20,7 +20,7 @@ public class ErrorResponse {
 
     private final String msg;
 
-    private ErrorResponse(Builder builder) {
+    private ApiErrorResponse(Builder builder) {
 
         this.code = builder.code;
         this.data = builder.data;
@@ -38,18 +38,13 @@ public class ErrorResponse {
             return this;
         }
 
-        public Builder setData(Map<String, Object> data) {
-            this.data = data;
-            return this;
-        }
-
         public Builder setMsg(String msg) {
             this.msg = msg;
             return this;
         }
 
-        public ErrorResponse build() {
-            return new ErrorResponse(this);
+        public ApiErrorResponse build() {
+            return new ApiErrorResponse(this);
         }
 
         public Builder setFieldErrorData(List<ObjectError> objectErrorList) {

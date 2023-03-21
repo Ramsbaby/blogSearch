@@ -11,21 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ApiResponse {
+public class ApiSuccessResponse {
 
-    Integer code;
-    String message;
     Object result;
 
-    public static ApiResponse error(Integer code, String message) {
-        return ApiResponse.builder()
-            .code(code)
-            .message(message)
-            .build();
-    }
-
-    public static ApiResponse success(Object result) {
-        return ApiResponse.builder()
+    public static ApiSuccessResponse success(Object result) {
+        return ApiSuccessResponse.builder()
             .result(result)
             .build();
     }

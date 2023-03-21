@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name="keyword")
+@Entity(name = "keyword")
 public class Keyword extends CommonEntity {
+
     @Id
     @Getter
     private String title;

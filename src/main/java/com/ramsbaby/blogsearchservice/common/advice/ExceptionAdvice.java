@@ -1,7 +1,6 @@
 package com.ramsbaby.blogsearchservice.common.advice;
 
-import com.ramsbaby.blogsearchservice.common.response.ErrorResponse;
-import java.text.ParseException;
+import com.ramsbaby.blogsearchservice.common.response.ApiErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,8 +14,8 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        return new ErrorResponse.Builder()
+    public ApiErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        return new ApiErrorResponse.Builder()
             .setCode(HttpStatus.BAD_REQUEST.value())
             .setMsg(e.getMessage())
             .setFieldErrorData(e.getAllErrors())
@@ -25,8 +24,8 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(value = IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleIllegalArgumentException(IllegalArgumentException e) {
-        return new ErrorResponse.Builder()
+    public ApiErrorResponse handleIllegalArgumentException(IllegalArgumentException e) {
+        return new ApiErrorResponse.Builder()
             .setCode(HttpStatus.BAD_REQUEST.value())
             .setMsg(e.getMessage())
             .build();
@@ -34,17 +33,8 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(value = InvalidParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleInvalidParameterException(InvalidParameterException e) {
-        return new ErrorResponse.Builder()
-            .setCode(HttpStatus.BAD_REQUEST.value())
-            .setMsg(e.getMessage())
-            .build();
-    }
-
-    @ExceptionHandler(value = ParseException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse parseException(ParseException e) {
-        return new ErrorResponse.Builder()
+    public ApiErrorResponse handleInvalidParameterException(InvalidParameterException e) {
+        return new ApiErrorResponse.Builder()
             .setCode(HttpStatus.BAD_REQUEST.value())
             .setMsg(e.getMessage())
             .build();
