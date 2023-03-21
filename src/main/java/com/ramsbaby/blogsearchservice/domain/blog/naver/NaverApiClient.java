@@ -20,11 +20,15 @@ public class NaverApiClient implements BlogSearchApi {
     private final String NAVER_CLIENT_ID_HEADER = "X-Naver-Client-Id";
     private final String NAVER_CLIENT_SECRET_HEADER = "X-Naver-Client-Secret";
     private final Long MAX_PAGE_SIZE = 100L;
+
     private WebClient webClient;
+
     @Value("${naver-developers.search.host}")
     private String naverApiHost;
+
     @Value("${naver-developers.search.client-id}")
     private String naverApiClientId;
+
     @Value("${naver-developers.search.client-secret}")
     private String naverApiClientSecret;
 
@@ -50,7 +54,7 @@ public class NaverApiClient implements BlogSearchApi {
             .bodyToMono(NBlogSearchResponseDto.class)
             .block();
         assert responseDto != null;
-        return responseDto.getItems().stream().map(BlogSearchResponseDto::new).limit(MAX_PAGE_SIZE)
+        return responseDto.getItems().stream().limit(MAX_PAGE_SIZE).map(BlogSearchResponseDto::new)
             .collect(Collectors.toList());
     }
 

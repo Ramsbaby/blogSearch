@@ -21,9 +21,12 @@ import reactor.core.publisher.Mono;
 public class KakaoApiClient implements BlogSearchApi {
 
     private final Long MAX_PAGE_SIZE = 50L;
+
     private WebClient webClient;
+
     @Value("${kakao-developers.search.host}")
     private String kakaoApiHost;
+
     @Value("${kakao-developers.search.api-key}")
     private String kakaoApikey;
 
@@ -50,7 +53,7 @@ public class KakaoApiClient implements BlogSearchApi {
             .block();
         assert responseDto != null;
 
-        return responseDto.getDocuments().stream().map(BlogSearchResponseDto::new).limit(MAX_PAGE_SIZE)
+        return responseDto.getDocuments().stream().limit(MAX_PAGE_SIZE).map(BlogSearchResponseDto::new)
             .collect(Collectors.toList());
     }
 }
