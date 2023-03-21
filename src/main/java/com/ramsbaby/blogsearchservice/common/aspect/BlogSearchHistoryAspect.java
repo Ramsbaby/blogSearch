@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 @RequiredArgsConstructor
-public class HistoryAspect {
+public class BlogSearchHistoryAspect {
 
     private final BlogService blogService;
 
