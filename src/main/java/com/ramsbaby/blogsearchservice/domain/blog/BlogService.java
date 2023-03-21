@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 
 @Service
 @RequiredArgsConstructor
@@ -39,13 +41,9 @@ public class BlogService {
     public List<BlogSearchResponseDto> getBlogs(BlogSearchRequestDto requestDto) {
         try {
             return kakaoApiClient.searchBlog(requestDto);
-        } catch (Exception e) {
-            if ("1001|KAKAO SERVER ERROR".equals(e.getMessage())) {
-                return naverApiClient.searchBlog(requestDto);
-            }
+        } catch (HttpServerErrorException e) {
+            return naverApiClient.searchBlog(requestDto);
         }
-
-        return null;
     }
 
     @Transactional
