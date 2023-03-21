@@ -1,9 +1,10 @@
-package com.ramsbaby.blogsearchservice.domain.blog.common;
+package com.ramsbaby.blogsearchservice.domain.blog;
 
 import com.ramsbaby.blogsearchservice.common.aspect.BlogSearchRequestCheck;
 import com.ramsbaby.blogsearchservice.common.response.ApiResponse;
-import com.ramsbaby.blogsearchservice.domain.blog.common.BlogService.Top10KeywordResponse;
-import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KakaoBlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.BlogService.Top10KeywordResponse;
+import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchRequestDto;
+import com.ramsbaby.blogsearchservice.domain.blog.commonDto.BlogSearchResponseDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,15 @@ public class BlogController {
 
     @GetMapping("")
     @BlogSearchRequestCheck
-    public ApiResponse getBlogs(@RequestBody KakaoBlogSearchRequestDto requestDto) {
-        return ApiResponse.success(blogService.getBlogs(requestDto));
+    public ApiResponse getBlogs(@RequestBody BlogSearchRequestDto requestDto) {
+        BlogSearchRequestDto validRequest = BlogSearchRequestDto.builder()
+            .query(requestDto.getQuery())
+            .sort(requestDto.getSort())
+            .page(requestDto.getPage())
+            .size(requestDto.getSize())
+            .build();
+
+        return ApiResponse.success(blogService.getBlogs(validRequest));
     }
 
     @GetMapping("/top10")

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class KaKaoBlogSearchResponse {
-    List<DocumentDto> documents;
+public class KBlogSearchResponseDto {
+
+    List<KBlogSearchResponseDetailDto> documents;
 }
