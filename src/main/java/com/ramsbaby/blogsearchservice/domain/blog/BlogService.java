@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 
@@ -27,10 +26,7 @@ public class BlogService {
         List<Top10KeywordResponse> responseList = new ArrayList<>();
         List<Top10Keyword> top10List = keywordRepository.findTop10();
 
-        top10List.forEach(keyword -> responseList.add(Top10KeywordResponse.builder()
-            .keyword(keyword.getTitle())
-            .count(keyword.getCount())
-            .build()));
+        top10List.forEach(keyword -> responseList.add(Top10KeywordResponse.of(keyword)));
 
         return responseList;
     }
@@ -53,13 +49,20 @@ public class BlogService {
     }
 
     @Getter
-    @Setter
     @Builder
     @AllArgsConstructor
     static class Top10KeywordResponse {
 
         private String keyword;
         private Long count;
+
+        public static Top10KeywordResponse of(Top10Keyword keyword) {
+            return Top10KeywordResponse.builder()
+                .keyword(keyword.getTitle())
+                .count(keyword.getCount())
+                .build();
+        }
     }
+
 
 }

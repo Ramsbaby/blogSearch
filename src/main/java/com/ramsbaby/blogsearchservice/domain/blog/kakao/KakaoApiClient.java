@@ -38,21 +38,28 @@ public class KakaoApiClient implements BlogSearchApi {
     @Override
     public List<BlogSearchResponseDto> searchBlog(BlogSearchRequestDto requestDto) {
         KBlogSearchRequestDto transRequestDto = KBlogSearchRequestDto.of(requestDto);
+        KBlogSearchResponseDto responseDto = send(transRequestDto);
 
-        KBlogSearchResponseDto responseDto = this.webClient.get()
+        assert responseDto != null;
+        return getKBlogResponse(responseDto);
+    }
+
+    private KBlogSearchResponseDto send(KBlogSearchRequestDto requestDto) {
+        return this.webClient.get()
             .uri(uriBuilder -> uriBuilder.path("/v2/search/blog")
-                .queryParam("query", transRequestDto.getQuery())
-                .queryParam("sort", transRequestDto.getSort())
-                .queryParam("page", transRequestDto.getPage())
-                .queryParam("size", transRequestDto.getSize())
+                .queryParam("query", requestDto.getQuery())
+                .queryParam("sort", requestDto.getSort())
+                .queryParam("page", requestDto.getPage())
+                .queryParam("size", requestDto.getSize())
                 .build())
             .header(HttpHeaders.AUTHORIZATION, "KakaoAK " + kakaoApikey)
             .retrieve()
             .onStatus(HttpStatus::isError, clientResponse -> Mono.empty())
             .bodyToMono(KBlogSearchResponseDto.class)
             .block();
-        assert responseDto != null;
+    }
 
+    private List<BlogSearchResponseDto> getKBlogResponse(KBlogSearchResponseDto responseDto) {
         return responseDto.getDocuments().stream().limit(MAX_PAGE_SIZE).map(BlogSearchResponseDto::new)
             .collect(Collectors.toList());
     }

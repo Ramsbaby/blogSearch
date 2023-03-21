@@ -3,6 +3,7 @@ package com.ramsbaby.blogsearchservice.domain.blog.naver;
 import com.ramsbaby.blogsearchservice.api.BlogSearchApi;
 import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchRequestDto;
 import com.ramsbaby.blogsearchservice.domain.blog.dto.BlogSearchResponseDto;
+import com.ramsbaby.blogsearchservice.domain.blog.kakao.dto.KBlogSearchResponseDto;
 import com.ramsbaby.blogsearchservice.domain.blog.naver.dto.NBlogSearchRequestDto;
 import com.ramsbaby.blogsearchservice.domain.blog.naver.dto.NBlogSearchResponseDto;
 import java.util.List;
@@ -40,20 +41,28 @@ public class NaverApiClient implements BlogSearchApi {
     @Override
     public List<BlogSearchResponseDto> searchBlog(BlogSearchRequestDto requestDto) {
         NBlogSearchRequestDto transRequestDto = NBlogSearchRequestDto.of(requestDto);
+        NBlogSearchResponseDto responseDto = send(transRequestDto);
 
-        NBlogSearchResponseDto responseDto = this.webClient.get()
+        assert responseDto != null;
+        return getNBlogResponse(responseDto);
+    }
+
+    private NBlogSearchResponseDto send(NBlogSearchRequestDto requestDto) {
+        return this.webClient.get()
             .uri(uriBuilder -> uriBuilder.path("/v1/search/blog.json")
-                .queryParam("query", transRequestDto.getQuery())
-                .queryParam("display", transRequestDto.getDisplay())
-                .queryParam("start", transRequestDto.getStart())
-                .queryParam("sort", transRequestDto.getSort())
+                .queryParam("query", requestDto.getQuery())
+                .queryParam("display", requestDto.getDisplay())
+                .queryParam("start", requestDto.getStart())
+                .queryParam("sort", requestDto.getSort())
                 .build())
             .header(NAVER_CLIENT_ID_HEADER, naverApiClientId)
             .header(NAVER_CLIENT_SECRET_HEADER, naverApiClientSecret)
             .retrieve()
             .bodyToMono(NBlogSearchResponseDto.class)
             .block();
-        assert responseDto != null;
+    }
+
+    private List<BlogSearchResponseDto> getNBlogResponse(NBlogSearchResponseDto responseDto) {
         return responseDto.getItems().stream().limit(MAX_PAGE_SIZE).map(BlogSearchResponseDto::new)
             .collect(Collectors.toList());
     }
