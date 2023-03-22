@@ -46,6 +46,7 @@ public class BlogService {
     }
 
     @Transactional
+    @Lock(LockModeType.OPTIMISTIC)
     public void updateUseCount(String keyword) {
         Keyword keywordEntity = keywordRepository.findById(keyword)
             .orElse(new Keyword(keyword));
