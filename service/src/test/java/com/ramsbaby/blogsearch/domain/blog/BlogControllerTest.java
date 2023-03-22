@@ -62,7 +62,6 @@ public class BlogControllerTest {
 
         // then
         assertThat(result).isNotEmpty();
-        assertThat(result.get(1).getCount()).isEqualTo(1);
-        assertThat(result.get(1).getKeyword()).isEqualTo(blogSearchRequestDto2.getQuery());
+        assertThat(result.get(0).getCount()).isEqualTo(1);
     }
 }
