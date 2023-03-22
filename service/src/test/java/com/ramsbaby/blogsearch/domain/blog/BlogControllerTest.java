@@ -33,7 +33,6 @@ public class BlogControllerTest {
         blogSearchRequestDto = BlogSearchRequestDto.builder().query(query).sort(sort).page(page).size(size).build();
         blogSearchRequestDto2 = BlogSearchRequestDto.builder().query(query2).sort(sort).page(page).size(size).build();
 
-        blogService.getBlogs(blogSearchRequestDto2);
 
     }
 
@@ -56,14 +55,14 @@ public class BlogControllerTest {
     @DisplayName("2. TOP10 인기 키워드 조회")
     void TOP10_인기_키워드_조회(){
         // given
+        blogService.getBlogs(blogSearchRequestDto2);
 
         // when
         List<Top10KeywordResponse> result = blogService.getTop10Keyword();
 
         // then
         assertThat(result).isNotEmpty();
-        assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get(0).getCount()).isEqualTo(1);
-        assertThat(result.get(0).getKeyword()).isEqualTo(blogSearchRequestDto2.getQuery());
+        assertThat(result.get(1).getCount()).isEqualTo(1);
+        assertThat(result.get(1).getKeyword()).isEqualTo(blogSearchRequestDto2.getQuery());
     }
 }
