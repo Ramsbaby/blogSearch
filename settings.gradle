@@ -1,1 +1,4 @@
-rootProject.name = 'blogSearchService'
+rootProject.name = 'blogSearch'
+include 'core'
+include 'service'
+
