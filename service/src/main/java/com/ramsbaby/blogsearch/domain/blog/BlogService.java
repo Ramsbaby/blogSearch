@@ -5,15 +5,19 @@ import com.ramsbaby.blogsearch.domain.blog.dto.BlogSearchResponseDto;
 import com.ramsbaby.blogsearch.domain.blog.kakao.KakaoApiClient;
 import com.ramsbaby.blogsearch.domain.blog.naver.NaverApiClient;
 
+import com.zaxxer.hikari.util.IsolationLevel;
 import java.util.ArrayList;
 import java.util.List;
-import javax.transaction.Transactional;
+import javax.persistence.LockModeType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpServerErrorException;
 
 @Service
@@ -35,9 +39,9 @@ public class BlogService {
 
     public List<BlogSearchResponseDto> getBlogs(BlogSearchRequestDto requestDto) {
         try {
-            return naverApiClient.searchBlog(requestDto);
-        } catch (HttpServerErrorException e) {
             return kakaoApiClient.searchBlog(requestDto);
+        } catch (HttpServerErrorException e) {
+            return naverApiClient.searchBlog(requestDto);
         }
     }
 
