@@ -21,20 +21,25 @@ public class BlogControllerTest {
     private BlogService blogService;
 
     private BlogSearchRequestDto blogSearchRequestDto;
+    private BlogSearchRequestDto blogSearchRequestDto2;
 
     @BeforeEach
     void setUp() {
         String query = "keyword";
+        String query2 = "keyword2";
         String sort = "accuracy";
         Integer page = 1;
         Integer size = 10;
         blogSearchRequestDto = BlogSearchRequestDto.builder().query(query).sort(sort).page(page).size(size).build();
+        blogSearchRequestDto2 = BlogSearchRequestDto.builder().query(query2).sort(sort).page(page).size(size).build();
+
+        blogService.getBlogs(blogSearchRequestDto2);
+
     }
 
     @Test
     @DisplayName("블로그 검색")
-    @Order(1)
-    void 블로그_검색() throws Exception {
+    void 블로그_검색() {
         // given
 
         // when
@@ -49,18 +54,16 @@ public class BlogControllerTest {
 
     @Test
     @DisplayName("2. TOP10 인기 키워드 조회")
-    @Order(2)
     void TOP10_인기_키워드_조회(){
         // given
-        blogService.getBlogs(blogSearchRequestDto);
 
         // when
         List<Top10KeywordResponse> result = blogService.getTop10Keyword();
 
         // then
         assertThat(result).isNotEmpty();
-        assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(0).getKeyword()).isEqualTo(blogSearchRequestDto.getQuery());
+        assertThat(result.size()).isEqualTo(2);
         assertThat(result.get(0).getCount()).isEqualTo(1);
+        assertThat(result.get(0).getKeyword()).isEqualTo(blogSearchRequestDto2.getQuery());
     }
 }
