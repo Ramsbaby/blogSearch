@@ -31,8 +31,8 @@ public class BlogSearchHistoryAspect {
             blogService.updateUseCount(requestDto.getQuery());
         } catch (ObjectOptimisticLockingFailureException e) {
             retryCnt++;
-            if (retryCnt == 2) {
-                throw e;
+            if (retryCnt == 3) {
+                return joinPoint.proceed();
             } else {
                 blogService.updateUseCount(requestDto.getQuery());
             }
